@@ -1232,6 +1232,11 @@ static int uart_wait_modem_status(struct uart_state *state, unsigned long arg)
 			break;
 		}
 
+		if (tty_io_error(tty)) {
+			ret = -EIO;
+			break;
+		}
+
 		schedule();
 
 		/* see if a signal did it */
